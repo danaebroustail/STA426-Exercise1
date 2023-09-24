@@ -1,0 +1,59 @@
+---
+title: "Exercise 1"
+author: "Danaé Broustail"
+format: html
+editor: visual
+---
+
+## Sampling from log normal distribution
+
+We sample 100 values from the log-normal distribution using the `rlnorm` function with $\mu = 5, \sigma = 0.5$.
+
+```{r}
+set.seed(1) 
+
+mu <- 5.
+sigma <- 0.5
+
+vec <- rlnorm(100, meanlog = mu, sdlog = sigma)
+```
+
+## Plotting sampled values
+
+We create the plots on the linear and log scale.
+
+#### Histogram
+
+```{r}
+library(ggplot2)
+
+# convert to data frame
+data <- data.frame(values = vec)
+
+# linear scale
+p1 <- ggplot(data, aes(x = values)) + geom_histogram() 
+p1 + ggtitle("Histogram of sampled values")
+
+# log scale
+p2 <- ggplot(data, aes(x = log(values))) + geom_histogram()
+p2 + ggtitle("Histogram of sampled values (log scale)") + xlab("Log of values") 
+
+```
+
+#### Violin plot
+
+```{r}
+
+# linear scale
+p1 <- ggplot(data, aes(x = "", y = values)) + geom_violin() 
+p1 + xlab("") + ggtitle("Violin plot of sampled values")
+
+# log scale
+p2 <- ggplot(data, aes(x = "", y = log(values))) + geom_violin() 
+p2 + xlab("") + ggtitle("Violin plot of the log of sampled values")
+
+```
+
+## Mean and standard deviation of sampled values
+
+The mean is `r mean(vec)` and the standard deviation is `r sd(vec)` .
