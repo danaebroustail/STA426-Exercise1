@@ -7,7 +7,7 @@ editor: visual
 
 ## Sampling from log normal distribution
 
-We sample 100 values from the log-normal distribution using the `rlnorm` function with $\mu = 5, \sigma = 0.5$.
+We sample 100 values from the log-normal distribution using the `rlnorm` function with $\mu = 5, \sigma = 0.5$. We set a seed for reproducibility.
 
 ```{r}
 set.seed(1) 
@@ -24,6 +24,8 @@ We create the plots on the linear and log scale.
 
 #### Histogram
 
+We generate the histogram plots for both linear and log scales.
+
 ```{r}
 library(ggplot2)
 
@@ -31,16 +33,18 @@ library(ggplot2)
 data <- data.frame(values = vec)
 
 # linear scale
-p1 <- ggplot(data, aes(x = values)) + geom_histogram() 
+p1 <- ggplot(data, aes(x = values)) + geom_histogram(bins = 30) 
 p1 + ggtitle("Histogram of sampled values")
 
 # log scale
-p2 <- ggplot(data, aes(x = log(values))) + geom_histogram()
+p2 <- ggplot(data, aes(x = log(values))) + geom_histogram(bins = 30)
 p2 + ggtitle("Histogram of sampled values (log scale)") + xlab("Log of values") 
 
 ```
 
 #### Violin plot
+
+We generate the violin plots for both linear and log scales.
 
 ```{r}
 
