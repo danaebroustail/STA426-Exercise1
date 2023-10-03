@@ -33,13 +33,15 @@ library(ggplot2)
 data <- data.frame(values = vec)
 
 # linear scale
-p1 <- ggplot(data, aes(x = values)) + geom_histogram(bins = 30) 
-p1 + ggtitle("Histogram of sampled values")
+p1 <- ggplot(data, aes(x = values)) + geom_histogram(bins = 30) +
+      ggtitle("Histogram of sampled values")
+p1
 
 # log scale
-p2 <- ggplot(data, aes(x = log(values))) + geom_histogram(bins = 30)
-p2 + ggtitle("Histogram of sampled values (log scale)") + xlab("Log of values") 
-
+p2 <- ggplot(data, aes(x = values)) + geom_histogram(bins = 30) +
+      scale_x_log10() + ggtitle("Histogram of sampled values on the log scale") +
+      xlab("Values") 
+p2
 ```
 
 #### Violin plot
@@ -49,12 +51,15 @@ We generate the violin plots for both linear and log scales.
 ```{r}
 
 # linear scale
-p1 <- ggplot(data, aes(x = "", y = values)) + geom_violin() 
-p1 + xlab("") + ggtitle("Violin plot of sampled values")
+p1 <- ggplot(data, aes(x = "", y = values)) + geom_violin() +
+              xlab("") + ggtitle("Violin plot of sampled values")
+p1
 
 # log scale
-p2 <- ggplot(data, aes(x = "", y = log(values))) + geom_violin() 
-p2 + xlab("") + ggtitle("Violin plot of the log of sampled values")
+p2 <- ggplot(data, aes(x = "", y = values)) + geom_violin() +
+             scale_y_log10() + xlab("") + 
+             ggtitle("Violin plot of sampled values on the log scale")
+p2
 
 ```
 
